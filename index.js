@@ -44,11 +44,15 @@ app.post('/login',function(req,res){
 				"go":{
 					"url":"/",
 					"font":"点此跳转"
-				},
+				}
 			});
 		}else{
 			res.render("message.ejs",{
-				"message":"密码错误"
+				"message":"密码错误",
+				"go":{
+					"url":"..",
+					"font":"点此跳转"
+				}
 			});
 		}
 	});
@@ -69,7 +73,11 @@ app.post('/regist',function(req,res){
 		Users.find({username:req.body.username},function(err,data){
 			if(data.length != 0){
 				res.render("message.ejs",{
-					"message":"用户名已存在"
+					"message":"用户名已存在",
+					"go":{
+						"url":"..",
+						"font":"点此跳转"
+					}
 				});
 				return;
 			}else{
@@ -84,7 +92,11 @@ app.post('/regist',function(req,res){
 							"password":req.body.password
 						};
 						res.render("message.ejs",{
-							"message":"注册成功"
+							"message":"注册成功",
+							"go":{
+								"url":"/",
+								"font":"点此跳转"
+							}
 						});
 					}
 				});
