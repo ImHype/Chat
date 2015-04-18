@@ -34,3 +34,11 @@ header , footer {
 .clearfix:after{
 	clear: both;
 }
+.wrapper{
+	max-width: 300px;
+	margin: 0 auto;
+	padding: 10px;
+}
+.prom{
+	line-height: 34px;
+}

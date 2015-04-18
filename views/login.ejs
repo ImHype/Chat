@@ -1,7 +1,17 @@
 <% include head.ejs %>
-	<form action="/login" action="post">
-		<input type="text">
-		<input type="password">
-		<input type="submit">
-	</form>
+	<div class="wrapper">
+		<h2 class="text-center">登录</h2>
+		<form action="/login" method="post" class="form">
+			<div class="form-group">
+				<input type="text" name="username" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control">
+			</div>
+			<div class="clearfix">
+				<input type="submit"value="登录" class="btn btn-info">
+				<a href="/regist" class="pull-right prom">没有账号,注册</a>
+			</div>
+		</form>
+	</div>
 <% include foot.ejs %>

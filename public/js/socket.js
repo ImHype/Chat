@@ -7,8 +7,6 @@ btn.onclick=function(){
 	ws.send(text.value);
 }
 ws.onopen = function() {
-   var name = window.prompt("输入你的名字");
-   ws.send(name);
 };    
      
 ws.onmessage = function (evt) {

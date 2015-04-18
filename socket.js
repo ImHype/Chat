@@ -1,19 +1,19 @@
-var WebSocketServer = require('ws').Server
-  , wss = new WebSocketServer({ port: 8080 });
-wss.broadcast = function broadcast(data) {
-  wss.clients.forEach(function each(client) {
-    client.send(data);
-  });
-};
+function socket (user) {
 
-wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(message) {
+  var WebSocketServer = require('ws').Server
+    , wss = new WebSocketServer({ port: 8080 });
+  wss.broadcast = function broadcast(data) {
+    wss.clients.forEach(function each(client) {
+      client.send(data);
+    });
+  };
 
-   if(!ws.e){
-   	ws.e = message;
-   	ws.send("欢迎您"+message);
-   	return;
-   }
-  	wss.broadcast(ws.e+":"+message+"<br/>");
+  wss.on('connection', function connection(ws) {
+    
+    ws.send("欢迎&nbsp;&nbsp;"+user.username);
+    ws.on('message', function incoming(message) {
+      wss.broadcast(user.username+":"+message+"<br/>");
+    });
   });
-});
+}
+module.exports = socket;
