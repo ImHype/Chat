@@ -1,4 +1,3 @@
-var socket = require("./socket.js");
 var express = require("express");
 var app = express();
 var session = require('express-session');
@@ -10,20 +9,72 @@ mongoose.connect('mongodb://localhost/chat');
 var Users = mongoose.model('user', { username: String ,password: String });
 
 
+var WebSocketServer = require('ws').Server
+  , wss = new WebSocketServer({ port: 8080 });
+
+wss.broadcast = function broadcast(data) {
+
+  wss.clients.forEach(function each(client) {
+
+    client.send(data);
+  });
+};
+
+wss.on('connection', function connection(ws) {
+
+  ws.on('message', function incoming(message) {
+
+    var mes =JSON.parse(message);
+
+    if(ws.user == null){
+
+      Users.findOne({username:mes.username,password:mes.password},function(err,data){
+      
+        if(data !=null ){
+      
+          ws.user = mes.username;
+
+          ws.psw = mes.password;
+
+          ws.send(" <h2>"+ws.user+"</h2> 进入<hr>");
+        
+        }else{
+
+          ws.send("密码不正确")
+          ws.close();          
+        }
+      });
+    }else{
+
+      wss.broadcast("<span class='username'>"+ws.user+"</span>:<span class='txt'>"+mes.txt+"</span><br/>");
+    }
+  });
+});
+
+
 app.engine('html',require('ejs').renderFile);
+
 app.set('port',3000);
+
 app.use(session({
+
   secret: "chat",
-  cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
+
+  cookie: {maxAge: 1000 * 60 * 60 * 24 * 30}//30 days
+
 }));
+
+app.use(cookie());
+
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + '/public'));
+
+
 app.get('/',function(req,res){
 	if(req.session.user != null){
-		console.log(req.session.user)
-		socket(req.session.user);
 		res.render('index.ejs');
 	}else{
 		res.render('main.ejs');
@@ -35,6 +86,7 @@ app.get('/login',function(req,res){
 app.post('/login',function(req,res){
 	Users.findOne({username:req.body.username,password:req.body.password},function(err,data){
 		if(data !=null ){
+			res.setHeader("Set-Cookie",["user="+req.body.username,"psw="+req.body.password]);
 			req.session.user={
 				"username":req.body.username,
 				"password":req.body.password
@@ -46,6 +98,7 @@ app.post('/login',function(req,res){
 					"font":"点此跳转"
 				}
 			});
+
 		}else{
 			res.render("message.ejs",{
 				"message":"密码错误",
@@ -81,13 +134,15 @@ app.post('/regist',function(req,res){
 				});
 				return;
 			}else{
+				res.setHeader("Set-Cookie",["user="+req.body.username,"psw="+req.body.password]);
+
 				var kitty = new Users({
 					"username":req.body.username,
 					"password":req.body.password
 				});
 				kitty.save(function (err) {
 					if(!err){
-						req.session.user={
+						req.cookies.user = req.session.user= {
 							"username":req.body.username,
 							"password":req.body.password
 						};
@@ -106,6 +161,7 @@ app.post('/regist',function(req,res){
 	}
 	
 })
+
 app.use(function(req,res){
 	res.type('text/plain');
 	res.status(404);
@@ -117,7 +173,6 @@ app.use(function(err, req, res, next){
     res.status(500);
     res.send('500 - Server Error');
 });
-
 app.listen(app.get('port'), function(){
      console.log( 'Express started on http://localhost:' +
         app.get('port') + '; press Ctrl-C to terminate.' );
