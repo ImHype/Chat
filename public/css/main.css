@@ -1,0 +1,36 @@
+body , div {
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti;
+}
+header , footer {
+	text-align: center;
+	background: #444;
+	color: #ccc;
+	overflow: hidden;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+}
+.container{
+	max-width: 1200px;
+	margin: 0 auto;
+}
+#broad {
+	width: 80%;
+	height: 400px;
+	overflow-y:auto;
+	background: #f3f3f3;
+	float: left;
+}
+#edit {
+	width: 20%;
+	height: 400px;
+	float: left;
+}
+.clearfix{
+	overflow: hidden;
+}
+.clearfix:after{
+	clear: both;
+}
