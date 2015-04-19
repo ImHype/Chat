@@ -22,11 +22,40 @@ header , footer {
 	overflow-y:auto;
 	background: #f3f3f3;
 	float: left;
+	padding: 10px;
+	border-radius: 5px;
+	-webkit-border-radius:5px;
 }
+#broad>h2 {
+	display: inline-block;
+	margin-right: 20px;
+
+}
+#broad span.username ,
+#broad span.txt {
+	display: inline-block;
+}
+#broad span.username {
+	/*width: 60px;*/
+	/*height: 60px;*/
+	/*line-height: 60px;*/
+	text-align: center;
+}
+#broad span.txt {
+	/*width: 400px;*/
+	height: auto;
+	/*padding: 20px;*/
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	text-decoration: underline;
+}
+
 #edit {
 	width: 20%;
 	height: 400px;
 	float: left;
+	padding: 20px;
+	padding-top: 50px;
 }
 .clearfix{
 	overflow: hidden;

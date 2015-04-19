@@ -1,9 +1,13 @@
 <% include head.ejs %>
 	<div class="container">
 		<div id="broad"></div>
-		<div id="edit">
-			<input type="text">
-			<button id="send">发送</button>	
+		<div id="edit" class="form">
+			<div class="form-group">
+				<input type="text" class="form-control">
+			</div>
+			<div class="text-center">
+				<button id="send" class="btn btn-info">发送</button>	
+			</div>
 		</div>
 	</div>
 	<script src="js/socket.js"></script>
