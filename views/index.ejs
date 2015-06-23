@@ -1,12 +1,14 @@
 <% include head.ejs %>
 	<div class="container">
-		<div id="broad"></div>
-		<div id="edit" class="form">
+		<div id="broad" class="col-sm-8"></div>
+		<div id="edit" class="form col-sm-4">
 			<div class="form-group">
-				<input type="text" class="form-control">
-			</div>
-			<div class="text-center">
-				<button id="send" class="btn btn-info">发送</button>	
+				<div class="input-group">
+					<input type="text" class="form-control">
+					<span class="input-group-btn">
+						<button id="send" class="btn btn-info">发送</button>	
+					</span>
+				</div>
 			</div>
 		</div>
 	</div>

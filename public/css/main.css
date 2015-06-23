@@ -12,12 +12,8 @@ header , footer {
 	line-height: 50px;
 	font-size: 20px;
 }
-.container{
-	max-width: 1200px;
-	margin: 0 auto;
-}
+
 #broad {
-	width: 80%;
 	height: 400px;
 	overflow-y:auto;
 	background: #f3f3f3;
@@ -42,16 +38,13 @@ header , footer {
 	text-align: center;
 }
 #broad span.txt {
-	/*width: 400px;*/
 	height: auto;
-	/*padding: 20px;*/
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	text-decoration: underline;
 }
 
 #edit {
-	width: 20%;
 	height: 400px;
 	float: left;
 	padding: 20px;
