@@ -78,7 +78,7 @@ wss.on('connection', function connection(ws) {
 
 app.engine('html',require('ejs').renderFile);
 
-app.set('port',3000);
+app.set('port',4000);
 
 app.use(session({
 
