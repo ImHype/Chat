@@ -3,7 +3,7 @@ var btn = doc.getElementById('send');
 var text = doc.getElementsByTagName('input')[0];
 var broad = doc.getElementById('broad');
 function afterAjax(token){
-var ws = new WebSocket("ws://127.0.0.1:8080/");
+var ws = new WebSocket("ws://106.186.119.126:8080/");
 btn.onclick=function(){
 	ws.send(JSON.stringify({
 		token:token.currentToken,
